@@ -29,7 +29,8 @@
 export default {
   head () {
     return {
-      title: this.text
+      // title: this.text
+      title: '..'
     }
   },
 
