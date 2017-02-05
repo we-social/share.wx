@@ -1,5 +1,7 @@
 <template>
   <div class="weui-uploader">
+    <weui-mask ref="mask"></weui-mask>
+
     <div class="weui-uploader__hd">
       <p class="weui-uploader__title">{{title}}</p>
       <div class="weui-uploader__info">{{value ? 1 : 0}}/1</div>
@@ -41,12 +43,15 @@
 </template>
 
 <script>
+// `mask` is built-in html tag
+import WeuiMask from '~components/Mask'
 import axios from 'axios'
 
 const baseUrl = 'http://fritx.me:8099'
 
 export default {
   name: 'weui-uploader',
+  components: { WeuiMask },
 
   props: {
     title: String,
@@ -73,14 +78,18 @@ export default {
   },
 
   methods: {
-    handleUpload (e) {
+    async handleUpload (e) {
       const file = e.target.files[0]
       if (file) {
         if (file.size > this.maxSize) {
           // NOTE: iPad微信6.5.4 弹窗后卡死 只能退出重进
           // alert('上传图片过大，你胆大包天')
-          confirm('你上传的图片好大，知道错没？')
+          // confirm('你上传的图片好大，知道错没？')
           // TODO: 使用weui-toast或dialog
+          await this.$refs.mask.alert(
+            '你上传的图片好大，知道错没？',
+            '知道了'
+          )
           return
         }
         const reader = new FileReader()
