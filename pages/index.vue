@@ -31,7 +31,7 @@
         </label>
       </div>
 
-      <fieldset v-if="form.showType === 'link'">
+      <fieldset v-show="form.showType === 'link'">
         <div class="weui-cells__title">
           打开跳转到
         </div>
@@ -48,7 +48,7 @@
         </div>
       </fieldset>
 
-      <fieldset v-if="form.showType === 'image'">
+      <fieldset v-show="form.showType === 'image'">
         <div class="weui-cells weui-cells_form">
           <div class="weui-cell">
             <div class="weui-cell__bd">
@@ -60,7 +60,7 @@
         </div>
       </fieldset>
 
-      <fieldset v-if="form.showType === 'text'">
+      <fieldset v-show="form.showType === 'text'">
         <div class="weui-cells__title">
           打开展示文字
         </div>
@@ -196,25 +196,32 @@ export default {
 
   methods: {
     wxUpdateShare () {
-      let link = this.form.showLink
-      if (link && !/^https?:/.test(link)) {
-        link = `http://${link}`
+      let link
+
+      if (this.form.showType === 'text') {
+        link = [
+          'http://share.wx.fritx.me/show?size=',
+          encodeURIComponent(this.form.showTextSize),
+          '&text=',
+          encodeURIComponent(this.form.showText)
+        ].join('')
+      } else if (this.form.showType === 'image') {
+        link = [
+          'http://share.wx.fritx.me/show?image=',
+          encodeURIComponent(this.form.showImage)
+        ].join('')
+      } else if (this.form.showType === 'link') {
+        link = this.form.showLink
+        if (!/^https?:/.test(link)) {
+          link = `http://${link}`
+        }
       }
+      link = link || location.href
 
       const data = {
         title: this.form.shareTitle || '「 分享生成器 」',
         desc: this.form.shareDesc || '“简直就是简易段子手工具”',
-        link: this.form.showText && [
-            'http://share.wx.fritx.me/show?size=',
-            encodeURIComponent(this.form.showTextSize),
-            '&text=',
-            encodeURIComponent(this.form.showText)
-          ].join('')
-          || this.form.showImage && [
-            'http://share.wx.fritx.me/show?image=',
-            encodeURIComponent(this.form.showImage)
-          ].join('')
-          || link || location.href,
+        link,
         imgUrl: this.form.shareImage
           || 'http://share.wx.fritx.me/laoge.jpg'
         // imgUrl: 'http://demo.open.weixin.qq.com/jssdk/images/p2166127561.jpg'
