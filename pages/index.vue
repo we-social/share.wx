@@ -129,8 +129,9 @@
       </div>
 
       <div class="weui-btn-area">
-        <span class="weui-btn weui-btn_disabled weui-btn_default">
-          点击右上角即可分享
+        <span class="weui-btn weui-btn_primary"
+          @click="handleSubmit">
+          点击生成
         </span>
       </div>
 
@@ -146,6 +147,8 @@
 <script>
 import Uploader from '~components/Uploader'
 import Slider from '~components/Slider'
+import wxfn from '~assets/wxfn'
+import config from '~/config'
 import axios from 'axios'
 
 export default {
@@ -171,17 +174,9 @@ export default {
       showTypeList: [
         { text: '文字', value: 'text' },
         { text: '图片', value: 'image' },
-        { text: '链接', value: 'link' },
+        // { text: '链接', value: 'link' },
+        // TODO: 链接类型 专有入口页
       ]
-    }
-  },
-
-  watch: {
-    form: {
-      deep: true,
-      handler () {
-        this.wxUpdateShare()
-      }
     }
   },
 
@@ -190,100 +185,20 @@ export default {
     // https://github.com/nuxt/nuxt.js/issues/22
     this.$el.removeAttribute('hidden')
 
-    await this.wxInitConfig()
-    this.wxUpdateShare()
+    await wxfn.config()
+    wxfn.share({
+      title: '「 分享生成器 」',
+      desc: '“简直就是简易段子手工具”',
+      link: 'http://share.wx.fritx.me',
+      imgUrl: 'http://share.wx.fritx.me/laoge.jpg'
+    })
   },
 
   methods: {
-    wxUpdateShare () {
-      let link
-
-      if (this.form.showType === 'text') {
-        link = [
-          'http://share.wx.fritx.me/show?size=',
-          encodeURIComponent(this.form.showTextSize),
-          '&text=',
-          encodeURIComponent(this.form.showText)
-        ].join('')
-      } else if (this.form.showType === 'image') {
-        link = [
-          'http://share.wx.fritx.me/show?image=',
-          encodeURIComponent(this.form.showImage)
-        ].join('')
-      } else if (this.form.showType === 'link') {
-        link = this.form.showLink
-        if (!/^https?:/.test(link)) {
-          link = `http://${link}`
-        }
-      }
-      link = link || location.href
-
-      const data = {
-        title: this.form.shareTitle || '「 分享生成器 」',
-        desc: this.form.shareDesc || '“简直就是简易段子手工具”',
-        link,
-        imgUrl: this.form.shareImage
-          || 'http://share.wx.fritx.me/laoge.jpg'
-        // imgUrl: 'http://demo.open.weixin.qq.com/jssdk/images/p2166127561.jpg'
-      }
-      console.log('wxdata update', data)
-
-      wx.ready(function () {
-        wx.onMenuShareTimeline(Object.assign({
-            // title: '', // 分享标题
-            // link: '', // 分享链接
-            // imgUrl: '', // 分享图标
-            success: function () { 
-                // 用户确认分享后执行的回调函数
-            },
-            cancel: function () { 
-                // 用户取消分享后执行的回调函数
-            }
-        }, data));
-
-        wx.onMenuShareAppMessage(Object.assign({
-            // title: '', // 分享标题
-            // desc: '', // 分享描述
-            // link: '', // 分享链接
-            // imgUrl: '', // 分享图标
-            // type: '', // 分享类型,music、video或link，不填默认为link
-            // dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-            success: function () { 
-                // 用户确认分享后执行的回调函数
-            },
-            cancel: function () { 
-                // 用户取消分享后执行的回调函数
-            }
-        }, data));
-      })
-    },
-
-    async wxInitConfig () {
-      const base = 'http://fritx.me:8099'
-      const { data } = await axios.get(`${base}/wxsign`)
-      console.log('wxdata init', data)
-
-      wx.config(Object.assign({
-        // debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-        appId: '', // 必填，公众号的唯一标识
-        timestamp: 0, // 必填，生成签名的时间戳
-        nonceStr: '', // 必填，生成签名的随机串
-        signature: '',// 必填，签名，见附录1
-        jsApiList: [
-          'onMenuShareTimeline',
-          'onMenuShareAppMessage',
-        ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-      }, data));
-
-      wx.ready(function(){
-        // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
-      });
-
-      wx.error(function(res){
-        // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
-        // alert(JSON.stringify(res))
-        console.error('wx.error', res)
-      });
+    async handleSubmit () {
+      const { data } = await axios
+        .post(`${config.apiUrl}/submit`, this.form)
+      this.$router.push(data.url)
     }
   }
 }
