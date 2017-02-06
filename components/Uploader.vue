@@ -1,6 +1,6 @@
 <template>
   <div class="weui-uploader">
-    <weui-mask ref="mask"></weui-mask>
+    <weui-dialog ref="dialog"/>
 
     <div class="weui-uploader__hd">
       <p class="weui-uploader__title">{{title}}</p>
@@ -43,15 +43,14 @@
 </template>
 
 <script>
-// `mask` is built-in html tag
-import WeuiMask from '~components/Mask'
+// mask/dialog is built-in html tag
+import WeuiDialog from '~components/Dialog'
 import axios from 'axios'
 
 const baseUrl = 'http://fritx.me:8099'
 
 export default {
-  name: 'weui-uploader',
-  components: { WeuiMask },
+  components: { WeuiDialog },
 
   props: {
     title: String,
@@ -86,7 +85,7 @@ export default {
           // alert('上传图片过大，你胆大包天')
           // confirm('你上传的图片好大，知道错没？')
           // TODO: 使用weui-toast或dialog
-          await this.$refs.mask.alert(
+          await this.$refs.dialog.alert(
             '你上传的图片好大，知道错没？',
             '知道了'
           )

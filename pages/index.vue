@@ -54,7 +54,7 @@
             <div class="weui-cell__bd">
               <uploader title="打开展示图片"
                 v-model="form.showImage"
-              ></uploader>
+              />
             </div>
           </div>
         </div>
@@ -83,7 +83,7 @@
           <div class="weui-cell__bd">
             <slider :range="[0.1, 3]"
               v-model="form.showTextSize"
-            ></slider>
+            />
           </div>
         </div>
       </fieldset>
@@ -123,7 +123,7 @@
           <div class="weui-cell__bd">
             <uploader title="分享占位图片"
               v-model="form.shareImage"
-            ></uploader>
+            />
           </div>
         </div>
       </div>

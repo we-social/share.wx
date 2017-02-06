@@ -22,8 +22,6 @@
 // WeUI-Slider
 // https://github.com/weui/weui/blob/master/src/example/fragment/slider.html
 export default {
-  name: 'weui-slider',
-
   props: {
     range: Array,
     value: Number,
