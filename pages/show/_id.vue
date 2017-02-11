@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import loadStats from '~assets/stats'
 import wxfn from '~/assets/wxfn'
 import config from '~/config'
 import axios from 'axios'
@@ -55,6 +56,8 @@ export default {
     // hack: 解决nuxt 内容比style先加载的bug
     // https://github.com/nuxt/nuxt.js/issues/22
     this.$el.removeAttribute('hidden')
+
+    loadStats()
 
     await wxfn.config()
     wxfn.share({
