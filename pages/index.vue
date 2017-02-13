@@ -10,26 +10,10 @@
       <div class="weui-cells__title">
         展示类型
       </div>
-      <div class="weui-cells weui-cells_radio">
-        <label v-for="item in showTypeList"
-          class="weui-cell weui-check__label"
-          :for="'showType-' + item.value"
-        >
-          <div class="weui-cell__bd">
-            <p>{{item.text}}</p>
-          </div>
-          <div class="weui-cell__ft">
-            <input type="radio"
-              class="weui-check" name="showType"
-              :value="item.value"
-              :id="'showType-' + item.value"
-              :checked="form.showType === item.value"
-              @click="form.showType = item.value"
-            >
-            <span class="weui-icon-checked"></span>
-          </div>
-        </label>
-      </div>
+      <radio-group name="showType"
+        v-model="form.showType"
+        :list="showTypeList"
+      />
 
       <fieldset v-show="form.showType === 'link'">
         <div class="weui-cells__title">
@@ -143,6 +127,7 @@
 </template>
 
 <script>
+import RadioGroup from '~components/RadioGroup'
 import Uploader from '~components/Uploader'
 import Slider from '~components/Slider'
 import loadStats from '~assets/stats'
@@ -152,7 +137,7 @@ import axios from 'axios'
 
 export default {
   name: 'share-generator',
-  components: { Slider, Uploader },
+  components: { Slider, Uploader, RadioGroup },
 
   head: {
     title: '分享生成器'
@@ -205,7 +190,8 @@ export default {
 }
 </script>
 
-<style scoped src="~assets/weui.css"></style>
+<style src="~assets/weui.css"></style>
+
 <style scoped>
 .page {
   background-color: #f8f8f8;

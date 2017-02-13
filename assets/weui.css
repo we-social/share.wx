@@ -122,23 +122,6 @@ a {
   margin-right: .2em;
 }
 
-.weui-check__label {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-.weui-cells_radio .weui-cell__ft {
-  padding-left: 0.35em;
-}
-.weui-check {
-  position: absolute;
-  left: -9999em;
-}
-.weui-cells_radio .weui-check:checked + .weui-icon-checked:before {
-  display: block;
-  content: '\EA08';
-  color: #09BB07;
-  font-size: 16px;
-}
-
 .weui-btn-area {
   margin: 1.17647059em 15px 0.3em;
 }
