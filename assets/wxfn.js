@@ -1,20 +1,31 @@
 import axios from 'axios'
 
-let alreadyInit = false
+let alreadyConfig = false
 
 export default {
   share,
   config
 }
 
+async function init () {
+  const script = document.createElement('script')
+  script.src = 'http://res.wx.qq.com/open/js/jweixin-1.0.0.js'
+  script.async = true
+  await new Promise(resolve => {
+    script.addEventListener('load', resolve)
+    document.body.appendChild(script)
+  })
+  console.log('wxfn init')
+}
+
 async function config () {
-  if (alreadyInit) {
-    return
-  }
-  const base = 'http://fritx.me:8099'
-  const { data } = await axios.get(`${base}/wxsign`)
-  console.log('wxfn init', data)
-  alreadyInit = true
+  if (alreadyConfig) return
+  const [{ data }] = await Promise.all([
+    axios.get('http://fritx.me:8099/wxsign'),
+    init()
+  ])
+  console.log('wxfn config', data)
+  alreadyConfig = true
 
   wx.config(Object.assign({
     // debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
@@ -30,12 +41,13 @@ async function config () {
 
   wx.ready(function(){
     // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+    console.log('wxfn ready')
   });
 
   wx.error(function(res){
     // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
     // alert(JSON.stringify(res))
-    console.error('wx.error', res)
+    console.log('wxfn error', res)
   });
 }
 

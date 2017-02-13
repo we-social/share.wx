@@ -22,8 +22,6 @@
     </style>
     <img v-if="showImage" :src="showImage">
     <h1 v-else v-text="showText" :style="textStyle"></h1>
-
-    <script src="/jweixin-1.0.0.js"></script>
   </div>
 </template>
 

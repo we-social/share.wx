@@ -139,8 +139,6 @@
         <p>share.wx.fritx.me</p>
       </div>
     </div>
-
-    <script src="/jweixin-1.0.0.js"></script>
   </section>
 </template>
 
