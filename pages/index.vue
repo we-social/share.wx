@@ -1,5 +1,5 @@
 <template>
-  <section class="page" hidden>
+  <main class="page" hidden>
     <div class="page__hd">
       <h1 class="page__title">「 分享生成器 」</h1>
       <p class="page__desc desc-1">“简直就是简易段子手工具”</p>
@@ -26,7 +26,7 @@
                 class="weui-textarea"
                 placeholder="“example.tv/天线宝宝/全集”"
                 v-model="form.showLink"
-              ></textarea>
+              />
             </div>
           </div>
         </div>
@@ -55,7 +55,7 @@
                 class="weui-textarea"
                 placeholder="“根本没有”"
                 v-model="form.showText"
-              ></textarea>
+              />
             </div>
           </div>
         </div>
@@ -82,7 +82,7 @@
               class="weui-textarea"
               placeholder="“狂吃还能减肥的办法！全网疯转！”"
               v-model="form.shareTitle"
-            ></textarea>
+            />
           </div>
         </div>
       </div>
@@ -97,7 +97,7 @@
               class="weui-textarea"
               placeholder="“大家都在围观的直播”"
               v-model="form.shareDesc"
-            ></textarea>
+            />
           </div>
         </div>
       </div>
@@ -123,7 +123,7 @@
         <p>share.wx.fritx.me</p>
       </div>
     </div>
-  </section>
+  </main>
 </template>
 
 <script>
@@ -183,8 +183,13 @@ export default {
 
   methods: {
     async handleSubmit () {
+      const form = Object.assign({}, this.form)
+      form.shareTitle = form.shareTitle || '惊天爆料'
+      form.shareDesc = form.shareDesc || '快来看啊~'
+      form.showText = form.showText || '哈哈哈'
+
       const { data } = await axios
-        .post(`${config.apiUrl}/submit`, this.form)
+        .post(`${config.apiUrl}/submit`, form)
       this.$router.push(data.url)
     }
   }
@@ -221,6 +226,9 @@ fieldset {
 .page__title {
   margin-bottom: 16px;
   font-size: 22px;
+}
+.page__ft {
+  padding-top: 20px;
 }
 .desc-1 {
   padding-left: 2.5em;

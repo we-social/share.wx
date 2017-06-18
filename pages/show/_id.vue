@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <main hidden>
     <style>
     body {
       font-size: 300%;
@@ -20,9 +20,10 @@
       justify-content: center;
     }
     </style>
+
     <img v-if="showImage" :src="showImage">
     <h1 v-else v-text="showText" :style="textStyle"></h1>
-  </div>
+  </main>
 </template>
 
 <script>

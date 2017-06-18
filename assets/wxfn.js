@@ -1,4 +1,5 @@
 import axios from 'axios'
+import cfg from '~/config'
 
 let alreadyConfig = false
 
@@ -21,7 +22,7 @@ async function init () {
 async function config () {
   if (alreadyConfig) return
   const [{ data }] = await Promise.all([
-    axios.get('https://fritx.me/mpwx/wxsign'),
+    axios.get(`${cfg.apiUrl}/wxsign`),
     init()
   ])
   console.log('wxfn config', data)

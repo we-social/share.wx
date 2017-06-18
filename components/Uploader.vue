@@ -46,8 +46,7 @@
 // mask/dialog is built-in html tag
 import WeuiDialog from '~components/Dialog'
 import axios from 'axios'
-
-const baseUrl = 'https://fritx.me/mpwx'
+import config from '~/config'
 
 export default {
   components: { WeuiDialog },
@@ -97,8 +96,8 @@ export default {
           const form = new FormData()
           form.append('image', file)
           const { data } = await axios
-            .post(`${baseUrl}/upload`, form)
-          this.$emit('input', `${baseUrl}${data.url}`)
+            .post(`${config.apiUrl}/upload`, form)
+          this.$emit('input', `${config.apiUrl}/${data.url}`)
         })
         reader.readAsDataURL(file)
       }
