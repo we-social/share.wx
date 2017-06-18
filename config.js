@@ -2,7 +2,7 @@ let data
 
 if (process.env.NODE_ENV === 'production') {
   data = {
-    apiUrl: 'http://fritx.me:8099'
+    apiUrl: 'https://fritx.me/mpwx'
   }
 } else {
   data = {

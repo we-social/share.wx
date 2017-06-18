@@ -57,13 +57,14 @@ export default {
 
     loadStats()
 
+    const base = location.protocol + '//' + location.host
     await wxfn.config()
     wxfn.share({
       title: this.shareTitle,
       desc: this.shareDesc,
-      link: `http://share.wx.fritx.me/show/${this.id}`,
+      link: `${base}/show/${this.id}`,
       imgUrl: this.shareImage
-        || 'http://share.wx.fritx.me/laoge.jpg'
+        || `${base}/laoge.jpg`
     })
   },
 

@@ -47,7 +47,7 @@
 import WeuiDialog from '~components/Dialog'
 import axios from 'axios'
 
-const baseUrl = 'http://fritx.me:8099'
+const baseUrl = 'https://fritx.me/mpwx'
 
 export default {
   components: { WeuiDialog },

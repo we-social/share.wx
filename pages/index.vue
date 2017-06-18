@@ -171,12 +171,13 @@ export default {
 
     loadStats()
 
+    const base = location.protocol + '//' + location.host
     await wxfn.config()
     wxfn.share({
       title: '「 分享生成器 」',
       desc: '“简直就是简易段子手工具”',
-      link: 'http://share.wx.fritx.me',
-      imgUrl: 'http://share.wx.fritx.me/laoge.jpg'
+      link: base,
+      imgUrl: `${base}/laoge.jpg`
     })
   },
 

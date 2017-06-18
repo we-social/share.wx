@@ -9,7 +9,7 @@ export default {
 
 async function init () {
   const script = document.createElement('script')
-  script.src = 'http://res.wx.qq.com/open/js/jweixin-1.0.0.js'
+  script.src = 'https://res.wx.qq.com/open/js/jweixin-1.0.0.js'
   script.async = true
   await new Promise(resolve => {
     script.addEventListener('load', resolve)
@@ -21,7 +21,7 @@ async function init () {
 async function config () {
   if (alreadyConfig) return
   const [{ data }] = await Promise.all([
-    axios.get('http://fritx.me:8099/wxsign'),
+    axios.get('https://fritx.me/mpwx/wxsign'),
     init()
   ])
   console.log('wxfn config', data)
