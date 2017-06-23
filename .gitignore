@@ -2,3 +2,4 @@ node_modules
 .nuxt
 sftp-*
 static/tongji.js
+config.js
