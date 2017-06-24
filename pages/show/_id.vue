@@ -40,7 +40,9 @@ export default {
     }
   },
 
-  async data ({ params }) {
+  // asycnData for context params
+  // https://github.com/nuxt/nuxt.js/issues/489
+  async asyncData ({ params }) {
     let { data } = await axios
       .get(`${config.apiUrl}/get/${params.id}`)
     data = _.defaults(data, {
