@@ -11,4 +11,4 @@ Demo: https://share.wx.fritx.me
 
 <img width="316" src="sc/share.wx.0.png">
 
-<img src="sc/share.wx.1.gif">&nbsp;&nbsp;&nbsp;<img src="sc/share.wx.2.gif">
+<img src="sc/share.wx.7.gif">&nbsp;&nbsp;&nbsp;<img src="sc/share.wx.8.gif">
