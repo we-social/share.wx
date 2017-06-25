@@ -1,7 +1,8 @@
 import axios from 'axios'
 import cfg from '~/config'
 
-let alreadyConfig = false
+// note: 页面切换到新的url 也是需要config的 否则不生效
+// let alreadyConfig = false
 
 export default {
   share,
@@ -20,13 +21,13 @@ async function init () {
 }
 
 async function config () {
-  if (alreadyConfig) return
+  // if (alreadyConfig) return
   const [{ data }] = await Promise.all([
     axios.get(`${cfg.apiUrl}/wxsign`),
     init()
   ])
   console.log('wxfn config', data)
-  alreadyConfig = true
+  // alreadyConfig = true
 
   wx.config(Object.assign({
     // debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
