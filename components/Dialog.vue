@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import WeuiMask from './Mask'
+import WeuiMask from '~/components/Mask'
 import _ from 'lodash'
 
 export default {

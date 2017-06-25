@@ -1,5 +1,12 @@
 <template>
   <main class="page" hidden>
+    <style>
+    /* 把背景色放在body上 bounce滑动不会出现白色断层 */
+    body {
+      background-color: #f8f8f8;
+    }
+    </style>
+
     <div class="page__hd">
       <h1 class="page__title">「 分享生成器 」</h1>
       <p class="page__desc desc-1">“简直就是简易段子手工具”</p>
@@ -199,9 +206,6 @@ export default {
 <style src="~assets/weui.css"></style>
 
 <style scoped>
-.page {
-  background-color: #f8f8f8;
-}
 .page__hd {
   padding: 40px;
 }

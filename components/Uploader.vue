@@ -97,7 +97,7 @@ export default {
           form.append('image', file)
           const { data } = await axios
             .post(`${config.apiUrl}/upload`, form)
-          this.$emit('input', `${config.apiUrl}/${data.url}`)
+          this.$emit('input', `${config.apiUrl}${data.url}`)
         })
         reader.readAsDataURL(file)
       }
