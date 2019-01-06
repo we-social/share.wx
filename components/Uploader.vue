@@ -44,7 +44,7 @@
 
 <script>
 // mask/dialog is built-in html tag
-import WeuiDialog from '~components/Dialog'
+import WeuiDialog from '~/components/Dialog'
 import axios from 'axios'
 import config from '~/config'
 

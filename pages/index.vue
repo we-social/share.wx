@@ -134,11 +134,11 @@
 </template>
 
 <script>
-import RadioGroup from '~components/RadioGroup'
-import Uploader from '~components/Uploader'
-import Slider from '~components/Slider'
-import loadStats from '~assets/stats'
-import wxfn from '~assets/wxfn'
+import RadioGroup from '~/components/RadioGroup'
+import Uploader from '~/components/Uploader'
+import Slider from '~/components/Slider'
+import loadStats from '~/assets/stats'
+import wxfn from '~/assets/wxfn'
 import config from '~/config'
 import axios from 'axios'
 
@@ -203,7 +203,7 @@ export default {
 }
 </script>
 
-<style src="~assets/weui.css"></style>
+<style src="~/assets/weui.css"></style>
 
 <style scoped>
 .page__hd {

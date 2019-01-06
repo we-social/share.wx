@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import loadStats from '~assets/stats'
+import loadStats from '~/assets/stats'
 import wxfn from '~/assets/wxfn'
 import config from '~/config'
 import axios from 'axios'

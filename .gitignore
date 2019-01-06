@@ -3,3 +3,4 @@ node_modules
 sftp-*
 static/tongji.js
 config.js
+package-lock.json

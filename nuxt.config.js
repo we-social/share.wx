@@ -3,7 +3,7 @@ module.exports = {
     vendor: ['axios']
   },
   css: [
-    '~assets/main.css'
+    '~/assets/main.css'
   ],
   head: {
     title: 'share.wx.fritx.me',
