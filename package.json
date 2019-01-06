@@ -2,9 +2,9 @@
   "name": "share.wx",
   "description": "",
   "scripts": {
-    "dev": "node server",
+    "dev": "nuxt",
     "build": "nuxt build",
-    "start": "NODE_ENV=production node server"
+    "start": "nuxt start"
   },
   "dependencies": {
     "axios": "^0.15.3",

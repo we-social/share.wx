@@ -1,4 +1,9 @@
 module.exports = {
+  // srcDir: __dirname,
+  server: {
+    port: 8199,
+    host: '127.0.0.1'
+  },
   build: {
     vendor: ['axios']
   },
